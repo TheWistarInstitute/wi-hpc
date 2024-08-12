@@ -1,0 +1,24 @@
+Bootstrap: docker
+From: ensemblorg/wiggletools 
+
+%help
+  Apptainer definition file based off the wiggletools container
+
+%labels
+  Author: Alex Harral
+  Email: aharral@wistar.org
+  Version: 0.1
+
+%post -c /bin/bash
+  apt -y update && apt -y upgrade 
+  apt -y install wget
+  
+  INSTALL_SCRIPT=Anaconda3-2023.09-0-Linux-x86_64.sh
+  wget https://repo.anaconda.com/archive/${INSTALL_SCRIPT}
+
+  bash ${INSTALL_SCRIPT} -b -p /opt/anaconda3
+  rm ${INSTALL_SCRIPT}
+
+
+%runscript
+  wiggletools

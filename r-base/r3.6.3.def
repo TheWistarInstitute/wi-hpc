@@ -1,0 +1,20 @@
+Bootstrap: docker
+From: r-base:3.6.3
+
+%help
+
+%labels
+  AUTHOR_NAME Alex Harral
+  AUTHOR_EMAIL aharral@wistar.org
+  VERSION 1.0
+
+%post -c /bin/bash
+  # install R packages
+  R -e 'if (!require("BiocManager", quietly = TRUE))
+          install.packages("BiocManager")
+        BiocManager::install(version = "3.10")'
+  R -e 'BiocManager::install("DiffBind")'
+
+%runscript
+
+%test

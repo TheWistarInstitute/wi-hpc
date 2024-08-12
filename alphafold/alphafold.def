@@ -1,0 +1,88 @@
+Bootstrap: docker
+From: nvidia/cuda:11.1.1-cudnn8-runtime-ubuntu18.04
+
+%help
+  This container provides an Alphafold container to be used for research purposes at The Wistar Institute.
+
+  First build the image
+    $ apptainer build alphafold_recipe.def alphafold.sif
+
+  Then run the image  
+    $ apptainer run alphafold.sif  # or ./alphafold.sif
+
+This apptainer definition file is a port from the Docker file at https://github.com/google-deepmind/alphafold/blob/main/docker/Dockerfile from the offical Alphafold GitHub Repository at https://github.com/google-deepmind/alphafold/tree/main.
+
+%labels
+  AUTHOR_NAME Alex Harral
+  AUTHOR_EMAIL aharral@wistar.org
+  VERSION 1.0
+
+%files
+  . /app/alphafold
+
+%environment
+  export PATH="/opt/conda/bin:/usr/local/cuda-11.1/bin:$PATH"
+
+%post
+  # Update and install dependices
+  apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
+    build-essential \
+    cmake \
+    cuda-command-line-tools-11-1 \
+    git \
+    hmmer \
+    kalign \
+    tzdata \
+    wget \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get autoremove -y \
+    && apt-get clean
+
+  # Compile HHsuite from source.
+  git clone --branch v3.3.0 https://github.com/soedinglab/hh-suite.git /tmp/hh-suite \
+    && mkdir /tmp/hh-suite/build \
+    && pushd /tmp/hh-suite/build \
+    && cmake -DCMAKE_INSTALL_PREFIX=/opt/hhsuite .. \
+    && make -j 4 && make install \
+    && ln -s /opt/hhsuite/bin/* /usr/bin \
+    && popd \
+    && rm -rf /tmp/hh-suite
+
+  # Install miniconda package manager
+  wget -q -P /tmp \
+    http://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda \
+    && rm /tmp/Miniconda3-latest-Linux-x86_64.sh
+
+  # Install the conda packages
+  PATH="/opt/conda/bin:/usr/local/cuda-11.1/bin:$PATH"
+  conda install -qy conda==23.5.2 \
+    && conda install -y -c conda-forge \
+    openmm=7.7.0 \
+    cudatoolkit==11.1.1 \
+    pdbfixer \
+    pip \
+    python=3.10 \
+   && conda clean --all --force-pkgs-dirs --yes
+
+  # Download test data  
+  wget -q -P /app/alphafold/alphafold/common/ \
+    https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
+
+  # Install Pip Packages
+  pip3 install --upgrade pip --no-cache-dir \
+    && pip3 install -r /app/alphafold/requirements.txt --no-cache-dir \
+    && pip3 install --upgrade --no-cache-dir \
+    jax==0.3.25 \
+    jaxlib==0.3.25+cuda11.cudnn805 \
+    -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+
+  # Add SETUID bit to the ldconfig binary so that non-root users can run it
+  # DAN - DOES THIS MATTER? ISNT THE USER ROOT IN THE CONTAINER?
+  chmod u+s /sbin/ldconfig.real
+
+%runscript
+  cd /app/alphafold
+  ldconfig -C /mnt/output/ld.so.cache
+  exec python /app/alphafold/run_alphafold.py "$@"

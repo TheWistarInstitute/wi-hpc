@@ -1,0 +1,41 @@
+Bootstrap: docker
+From: ubuntu:20.04
+
+%help
+  This container provides a Python script and research data. To run the script:
+
+    $ apptainer run my_image.sif  # or ./my_image.sif
+
+  The script is found in /opt/scripts and the data is found in /opt/data.
+
+%labels
+  AUTHOR_NAME Alex Harral
+  AUTHOR_EMAIL aharral@wistar.org
+  VERSION 1.0
+
+
+%environment
+  export PATH=/opt/miniconda3/bin:${PATH}
+  export LC_ALL='C'
+
+%post -c /bin/bash
+  apt-get -y update && apt-get -y upgrade
+  apt-get -y install wget
+
+  INSTALL_SCRIPT=Miniconda3-py38_4.9.2-Linux-x86_64.sh
+  wget https://repo.anaconda.com/miniconda/${INSTALL_SCRIPT}
+  bash ${INSTALL_SCRIPT} -b -p /opt/miniconda3
+  rm ${INSTALL_SCRIPT}
+
+  mkdir -p /opt/scripts && cd /opt/scripts
+  wget https://raw.githubusercontent.com/TheWistarInstitute/wi-hpc-apptainer/main/python/my_script.py
+
+  # cleanup
+  apt-get -y autoremove --purge
+  apt-get -y clean
+
+%runscript
+  python3 /opt/scripts/my_script.py
+
+%test
+  /opt/miniconda3/bin/python --version

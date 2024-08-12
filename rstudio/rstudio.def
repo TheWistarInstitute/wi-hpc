@@ -1,0 +1,37 @@
+Bootstrap: docker
+From: ubuntu:latest
+
+%help
+  This container is a template to start building. To run the script:
+
+    $ apptainer run rstudio_latest.sif  # or ./rstudio_latest.sif
+
+%labels
+  AUTHOR_NAME Alex Harral
+  AUTHOR_EMAIL aharral@wistar.org
+  VERSION 1.0
+
+%environment
+  # set environment variables
+  export LC_ALL='C'
+  export PORT=8888
+
+%post 
+
+  apt update -y && apt install -y software-properties-common r-base gdebi-core
+
+  cd /opt/
+
+  wget https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2023.12.1-402-amd64.deb
+
+  gdebi rstudio-server-2023.09.1-494-amd64.deb
+  
+  # setup firewall
+  ufw enable
+  ufw allow ssh
+  ufw allow 8787
+  ufw allow 3838
+  ufw reload
+
+%runscript
+	rstudio-server start

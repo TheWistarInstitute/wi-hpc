@@ -1,0 +1,21 @@
+Bootstrap: docker
+From: ubuntu:latest
+
+%help
+  This container provides an Ubuntu machine
+
+    $ apptainer run myimage.sif  # or ./myimage.sif
+
+%labels
+  AUTHOR_NAME Alex Harral
+  AUTHOR_EMAIL aharral@wistar.org
+  VERSION 1.0
+
+%post -c /bin/bash
+  # update the package lists
+  apt-get -y update
+  apt-get -y install neofetch
+
+%runscript
+  echo "Hello from the container!!!"
+  neofetch

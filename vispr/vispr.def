@@ -1,0 +1,34 @@
+Bootstrap: Docker
+From: centos:centos7
+
+%help
+  This container provides MAGECK-VISPR to be used for
+
+  To run the script:
+
+    $ apptainer run myimage.sif  # or ./myimage.sif
+
+%labels
+  AUTHOR_NAME Alex Harral
+  AUTHOR_EMAIL aharral@wistar.org
+  VERSION 1.0
+
+%environment
+  # set system locale
+  export LC_ALL='C'
+
+%post -c /bin/bash
+  
+  # Update system and install needed packages
+  yum -y update
+  yum -y install git wget groupinstall 
+
+  # Install Conda
+  wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.3-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-py37_4.8.3-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-py37_4.8.3-Linux-x86_64.sh 
+
+%runscript
+  echo "OS Release" cat /etc/os-release

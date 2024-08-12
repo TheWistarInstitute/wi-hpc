@@ -1,0 +1,24 @@
+Bootstrap: docker
+From: rockylinux:8.6
+
+%help
+	Rocky 8.6 base container
+
+%labels
+	Author: Alex Harral aharral@wistar.org
+	Version: 1.0.0
+
+%post
+	# Capture System Information
+	echo "Architecture" $(lscpu | grep "^Architecture" | cut -d ':' -f 2) >> "${APPTAINER_LABELS}"
+	echo "CPU" $(lscpu | grep "^Model name" | cut -d ':' -f 2) >> "${APPTAINER_LABELS}"
+	echo "uname" $(uname -srvpio) >> "${APPTAINER_LABELS}"
+
+%test
+	if grep -q 'NAME="Rocky Linux"' /etc/os-release; then
+		echo "SUCCESS: Container base is Rocky Linux as expected."
+	else
+		echo "ERROR: Container base is NOT Rocky Linux."
+		exit 1
+	fi
+

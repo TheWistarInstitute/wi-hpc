@@ -2,11 +2,8 @@
 
 Repository for all things The Wistar Institute's HPC Cluster.
 
-## What is an HPC Cluster?
+Please see https://hpc.apps.wistar.org for all documentation and information on how to recieve an account and log in.
 
-An HPC cluster, or high-performance computing cluster, is a combination of specialized hardware, including a group of large and powerful computers, and a distributed processing software framework configured to handle massive amounts of data at high speeds with parallel performance and high availability.
+The following files and folders are examples of slurm job scripting and containerized versions of software (using apptainer).
 
-
-## How do I use the WI-HPC Cluster?
-
-To use the WI-HPC Cluster, please first submit a ticket to the IT Help Desk at [helpdesk@wistar.org](mailto:helpdesk@wistar.org)
+Please contact The Wistar Institute's IT Help Desk with any questions!

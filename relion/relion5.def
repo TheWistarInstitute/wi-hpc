@@ -1,0 +1,48 @@
+Bootstrap: docker
+From: ubuntu:latest
+
+%help
+
+%labels
+  AUTHOR_NAME Alex Harral
+  AUTHOR_EMAIL aharral@wistar.org
+  VERSION 1.0
+
+%environment
+
+%post -c /bin/bash
+  apt -y update && apt -y upgrade
+  
+  # Install dependencies
+  apt -y install wget cmake git build-essential \
+  mpi-default-bin mpi-default-dev \
+  libfftw3-dev libtiff-dev libpng-dev ghostscript libxft-dev 
+
+  # Clone repo, checkout version 5 branch, and pull updates
+  git clone https://github.com/3dem/relion.git
+  cd relion
+  git checkout ver5.0
+  git pull
+
+  # Install miniconda and set up environment for python modules
+  mkdir -p ~/miniconda3
+  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+  bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+  rm -rf ~/miniconda3/miniconda.sh
+  conda env create -f relion.yml
+  conda env update -f relion.yml
+
+  # make build directory, change into, and build
+  mkdir build
+  cd build
+  cmake ..
+  make -j 2
+
+  # cleanup
+  apt-get -y autoremove --purge
+  apt-get -y clean
+
+%runscript
+
+%test
+

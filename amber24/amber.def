@@ -1,0 +1,36 @@
+Bootstrap: docker
+From: ubunut:latest
+
+%post
+    # Update and install dependencies
+    apt update && apt install -y tcsh make \
+               gcc gfortran openmpi \
+               flex bison patch bc wget \
+               xorg-dev libz-dev libbz2-dev
+
+    # set vars
+    INSTALL_DIR=/opt/amber24/
+    ARCHIVE_DIR=/wistar/it/aharral/software/
+
+    # make and change into install directory
+    mkdir $INSTALL_DIR
+    cd $INSTALL_DIR
+
+    # copy the archives to install directory
+    cp $ARCHIVE_DIR/AmberTools24.tar.bz2 .
+    cp $ARCHIVE_DIR/Amber24.tar.bz2 .
+
+    # unpack archives
+    tar xvjf AmberTools24.tar.bz2
+    tar xvjf Amber24.tar.bz2
+
+    # change into build dir
+    cd $INSTALL_DIR/amber24_src/build
+
+    # create make file
+    # TODO: set mpi, cuda, python, and others in run_cmake before running
+    ./run_cmake
+    
+    cd /opt/amber24/amber24_src/build && make install
+
+    source /opt/amber24/amber24/amber.sh   

@@ -1,0 +1,38 @@
+earootstrap: docker
+From: conda/miniconda3
+
+%help
+
+%labels
+  AUTHOR_NAME Alex Harral
+  AUTHOR_EMAIL aharral@wistar.org
+  VERSION 1.0
+
+%environment
+  # set system locale
+  export LC_ALL='C'
+
+%post -c /bin/bash
+  apt-get -y update && apt-get -y upgrade
+	apt-get -y install wget unzip
+
+  # Create and activate conda environment (python3.10 required)
+  conda create -n spipe conda-forge::python==3.10
+  conda activate spipe
+  
+  # Pull zipped archive
+  wget https://github.com/TheWistarInstitute/wi-hpc-apptainer/blob/main/ParseSeq-Biosciences/ParseBiosciences-Pipeline.1.2.1.zip
+
+  # Unzip archive
+  mkdir /opt/ParseSeq-Biosciences
+  unzip ParseBiosciences-Pipeline.1.2.1.zip -d /opt/ParseSeq-Biosciences
+  cd /opt/ParseSeq-Biosciences
+  bash ./install_dependencies_conda.sh -y --install
+
+  pip install --no-cache-dir ./
+
+
+  
+
+%runscript
+	cat /etc/os-release
