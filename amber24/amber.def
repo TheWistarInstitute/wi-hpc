@@ -1,36 +1,47 @@
 Bootstrap: docker
-From: ubunut:latest
+From: ubuntu:latest
+
+%environment
+  export AMBERHOME=/opt/amber24/amber24
+  export PATH="$AMBERHOME/bin:$PATH"
+  export LD_LIBRARY_PATH="$AMBERHOME/lib:$LD_LIBRARY_PATH"
+  export PERL5LIB="$AMBERHOME/lib/perl:$PERL5LIB"
+  export PYTHONPATH="$AMBERHOME/lib/python3.12/site-packages"
 
 %post
-    # Update and install dependencies
-    apt update && apt install -y tcsh make \
-               gcc gfortran openmpi \
-               flex bison patch bc wget \
-               xorg-dev libz-dev libbz2-dev
+  # Update and install dependencies
+  apt update && apt install -y tcsh make cmake \
+             gcc g++ gfortran \
+             flex bison patch bc wget \
+             xorg-dev libz-dev libbz2-dev bzip2
 
-    # set vars
-    INSTALL_DIR=/opt/amber24/
-    ARCHIVE_DIR=/wistar/it/aharral/software/
+  # set vars
+  INSTALL_DIR=/opt/amber24
+  # THIS NEEDS TO BE WHERE-EVER YOU PLACE THE .tar files
+  ARCHIVE_DIR=/mnt/aharral/software
 
-    # make and change into install directory
-    mkdir $INSTALL_DIR
-    cd $INSTALL_DIR
+  # make and change into install directory
+  mkdir $INSTALL_DIR
+  cd $INSTALL_DIR
 
-    # copy the archives to install directory
-    cp $ARCHIVE_DIR/AmberTools24.tar.bz2 .
-    cp $ARCHIVE_DIR/Amber24.tar.bz2 .
+  # copy the archives to install directory
+  cp $ARCHIVE_DIR/AmberTools24.tar.bz2 .
+  cp $ARCHIVE_DIR/Amber24.tar.bz2 .
 
-    # unpack archives
-    tar xvjf AmberTools24.tar.bz2
-    tar xvjf Amber24.tar.bz2
+  # unpack archives
+  tar xvjf AmberTools24.tar.bz2
+  tar xvjf Amber24.tar.bz2
 
-    # change into build dir
-    cd $INSTALL_DIR/amber24_src/build
+  # remove uneeded archives
+  rm AmberTools24.tar.bz2
+  rm Amber24.tar.bz2
 
-    # create make file
-    # TODO: set mpi, cuda, python, and others in run_cmake before running
-    ./run_cmake
-    
-    cd /opt/amber24/amber24_src/build && make install
+  # change into build dir
+  cd $INSTALL_DIR/amber24_src/build
 
-    source /opt/amber24/amber24/amber.sh   
+  # create make file
+  # TODO: set mpi, cuda, python, and others in run_cmake before running
+  ./run_cmake && make install
+
+  # source script and add to path
+  bash /opt/amber24/amber24/amber.sh
