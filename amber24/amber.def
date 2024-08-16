@@ -18,6 +18,7 @@ From: ubuntu:latest
   # set vars
   INSTALL_DIR=/opt/amber24
   # THIS NEEDS TO BE WHERE-EVER YOU PLACE THE .tar files
+  # /mnt/ == your --bind path
   ARCHIVE_DIR=/mnt/aharral/software
 
   # make and change into install directory
