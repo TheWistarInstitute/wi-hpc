@@ -22,5 +22,9 @@ From: ubuntu:20.04
 
   # unpack
   cd /opt/
-  unzip MaxQuant_v2.6.3.0
+  mkdir MaxQuant
+  unzip MaxQuant_v2.6.3.0 -d MaxQuant/
+  rm MaxQuant_v2.6.3.0.zip
 
+
+  dotnet MaxQuant/bin/MaxQuantCmd.dll mqpar.xml
