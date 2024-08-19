@@ -16,7 +16,9 @@
 port=$(shuf -i 6000-9999 -n 1)
 
 # define container name
-container=scipy-notebook_latest.sif
+container=scipy-notebook:latest
+# r container
+#container=r-notebook:latest
 
 # load apptainer module
 module load apptainer
@@ -24,7 +26,7 @@ module load apptainer
 # if the .sif file does not exist, pull it
 if ! test -f $container; then
   echo "Container does not exist...pulling"
-  apptainer pull docker://jupyer/scipy-notebook $container
+  apptainer pull docker://jupyter/$container
 fi
 
 # forward port to head node
