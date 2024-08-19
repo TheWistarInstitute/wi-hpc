@@ -16,3 +16,11 @@ From: ubuntu:20.04
   sudo apt-get install -y apt-transport-https && \
   sudo apt-get update && \
   sudo apt-get install -y dotnet-sdk-8.0
+
+  # copy over archive
+  cp /mnt/aharral/software/MaxQuant_v2.6.3.0.zip /opt/
+
+  # unpack
+  cd /opt/
+  unzip MaxQuant_v2.6.3.0
+
