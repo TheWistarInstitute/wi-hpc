@@ -1,5 +1,4 @@
-!/bin/bash
-
+#!/bin/bash
 #SBATCH --job-name=jupyter              # create a short name for your job
 #SBATCH --partition=defq                # shared partition (queue)
 #SBATCH --nodes=1                       # node count
@@ -16,9 +15,9 @@
 port=$(shuf -i 6000-9999 -n 1)
 
 # define container name
-container=scipy-notebook:latest
+#container=scipy-notebook:latest
 # r container
-#container=r-notebook:latest
+container=r-notebook:latest
 
 # load apptainer module
 module load apptainer
