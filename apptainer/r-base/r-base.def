@@ -24,6 +24,10 @@ From: r-base:4.3.2
   apt-get -y install file vim
 
   # install R packages
+  R -e 'if (!require("BiocManager", quietly = TRUE))
+          install.packages("BiocManager")
+        BiocManager::install(version = "3.10")'
+  R -e 'BiocManager::install("DiffBind")'
   R -e 'install.packages(c("dplyr", "tidyverse"))'
 
   mkdir -p /opt/scripts && cd /opt/scripts
