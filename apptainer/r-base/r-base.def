@@ -30,6 +30,11 @@ From: r-base:4.3.2
   R -e 'BiocManager::install("DiffBind")'
   R -e 'install.packages(c("dplyr", "tidyverse"))'
 
+  mkdir -p /opt/scripts && cd /opt/scripts
+  https://raw.githubusercontent.com/TheWistarInstitute/wi-hpc/main/apptainer/r-base/my_script.R
+
+  mkdir -p /opt/data && cd /opt/data
+  https://raw.githubusercontent.com/TheWistarInstitute/wi-hpc/main/apptainer/r-base/my_data.csv
 
 %runscript
   Rscript /opt/scripts/my_script.R
