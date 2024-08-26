@@ -25,5 +25,9 @@ From: ubuntu:20.04
   unzip MaxQuant_v2.6.3.0
   rm MaxQuant_v2.6.3.0.zip
 
-  dotnet MaxQuant_v2.6.3.0/bin/MaxQuantCmd.dll --create new_mqpar.xml
-  #dotnet MaxQuant_v2.6.3.0/bin/MaxQuantCmd.dll new_mqpar.xml
+
+  alias maxquant='dotnet MaxQuant_v2.6.3.0/bin/MaxQuantCmd.dll'
+
+  maxquant --create mqpar.xml
+  maxquant mqpar.xml --changeFolder new_mqpar.xml /mnt/aharral/data/fasta /mnt/aharral/data/raw
+
