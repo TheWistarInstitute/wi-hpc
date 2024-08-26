@@ -18,7 +18,7 @@ From: r-base:4.3.2
   apt-get -y update
 
   # install dependencies for tidyverse
-  apt-get -y install libxml2-dev libcurl4-openssl-dev libssl-dev
+  apt-get -y install libxml2-dev libcurl4-openssl-dev libssl-dev pkgconfigs
 
   # install extra packages
   apt-get -y install file vim
