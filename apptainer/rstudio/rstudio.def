@@ -18,7 +18,8 @@ From: ubuntu:latest
 
 %post 
 
-  apt update -y && apt install -y software-properties-common r-base gdebi-core
+  apt -y update && apt -y upgrade
+  apt -y install software-properties-common r-base gdebi-core
 
   cd /opt/
 
