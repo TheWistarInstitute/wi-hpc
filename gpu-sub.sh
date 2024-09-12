@@ -16,5 +16,12 @@
 #SBATCH --output slurm.%N.%j.out        # Output file name and Location
 #SBATCH --error slurm.%N.%j.err         # Error file name and Location
 
-# PLACE CODE HERE
+# Load Required Modules
+module load name
+
+# Check GPUs
+nvidia-smi
+
+# Place Code Here
 /bin/hostname
+

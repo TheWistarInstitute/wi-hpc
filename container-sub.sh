@@ -14,19 +14,12 @@
 # Load the apptainer module
 module load apptainer
 
-# Build Image (suggested)
-# able to use a definition file (container.def)
-# to make changes to the container (cannot when pulled)
-# if the .sif file does not exist, build it
-# to be used with job arrays, so container is not rebuilt each time
+# if the .sif file does not exist, build/pull it
 if ! test -f container.sif; then
-  echo "Container does not exist...building"
-  apptainer build container.sif recipe.def
+    echo "Container does not exist...building"
+    apptainer pull docker://image
+    apptainer build container.sif recipe.def
 fi
-
-# or Pull Image (verified only)
-# apptainer pull docker://<image>
-
 
 # execute command within image
 apptainer exec container.sif <command>
