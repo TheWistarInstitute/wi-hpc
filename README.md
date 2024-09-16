@@ -1,7 +1,4 @@
-
 # WI-HPC
-
-test
 
 Repository for all things The Wistar Institute's HPC Cluster.
 
