@@ -2,7 +2,7 @@ Bootstrap: docker
 From: ubuntu:20.04
 
 %post
-  
+
   # update and upgrade
   apt -y update && apt -y upgrade
 
@@ -13,21 +13,21 @@ From: ubuntu:20.04
   wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
   dpkg -i packages-microsoft-prod.deb
   apt-get update; \
-  apt-get install -y apt-transport-https && \
+  apt-get install -y apt-transport-https vim && \
   apt-get update && \
   apt-get install -y dotnet-sdk-8.0
 
   # copy over archive
-  cp /mnt/aharral/software/MaxQuant_v2.6.3.0.zip /opt/
+  cp /resources/software/MaxQuant_v2.6.3.0.zip /opt/
+  cp mqpar.xml /opt/
+  cp -r data/ /opt/
 
   # unpack
   cd /opt/
   unzip MaxQuant_v2.6.3.0
   rm MaxQuant_v2.6.3.0.zip
 
+%runscript
 
-  alias maxquant='dotnet MaxQuant_v2.6.3.0/bin/MaxQuantCmd.dll'
-
-  maxquant --create mqpar.xml
-  maxquant mqpar.xml --changeFolder new_mqpar.xml /mnt/aharral/data/fasta /mnt/aharral/data/raw
-
+  # run maxquant against custom mqpar.xml file
+  dotnet /opt/MaxQuant_v2.6.3.0/bin/MaxQuantCmd.dll /opt/mqpar.xml
