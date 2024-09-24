@@ -2,6 +2,7 @@
 <MaxQuantParams xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <fastaFiles>
       <FastaFileInfo>
+          <!--- UPDATE THIS PATH -->
          <fastaFilePath>/opt/data/fasta/20240806_UP000002311_Scerevisiae_559292_CI.fasta</fastaFilePath>
          <identifierParseRule>>(.*)</identifierParseRule>
          <descriptionParseRule></descriptionParseRule>
@@ -128,6 +129,7 @@
    <name>templateSession</name>
    <maxQuantVersion>2.6.3.0</maxQuantVersion>
    <pluginFolder></pluginFolder>
+   <!--- UPDATE THIS NUMBER -->
    <numThreads>4</numThreads>
    <emailAddress></emailAddress>
    <smtpHost></smtpHost>
@@ -142,6 +144,7 @@
    <showIsotopeMassDifferences>False</showIsotopeMassDifferences>
    <profilePerformance>False</profilePerformance>
    <filePaths>
+           <!--- UPDATE THIS PATH -->
            <string>/opt/data/raw/081924_Yeast_DDA_OA-AfterAP.raw</string>
    </filePaths>
    <experiments>
