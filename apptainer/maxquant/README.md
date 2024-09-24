@@ -1,15 +1,17 @@
 # MaxQuant
 
-MaxQuant Home Page: https://www.maxquant.org/
+[MaxQuant](https://www.maxquant.org) is a quantitative proteomics software package designed for analyzing large mass-spectrometric data sets. It is specifically aimed at high-resolution MS data.
 
-Please use apptainer to leverage the containerized version of maxquant.
+## Setup
 
+Clone this repository and change the directory to `apptainer/maxquant`
 
-1. Create the `maxquant.def` file and use apptainer to build the container
-2. Use the `maxquant.sh` script to build the container and run the maxquant
-3. Update paths in all files to point to the correct paths
+```bash
+git clone https://github.com/TheWistarInstitute/wi-hpc.git
+cd wi-hpc/apptainer/maxquant
+```
 
-***NOTE***: You will need to update the file paths to your data in the `mqpar.xml` file as well as the number of ***threads*** you wish to use in the following lines. The `<numThreads>` MUST match the `cpus-per-task=` option in the `maxquant.sh` submission script.
+Edit the mqpar.xml configuration file to point to your `.fasta` files and `.raw` files. As well as the `<numThreads>` option to match the number of threads you wish to use. E.g:
 
 ```bash
 # fasta file path
@@ -23,3 +25,43 @@ Please use apptainer to leverage the containerized version of maxquant.
 # number of threads
 <numThreads>4</numThreads>
 ```
+
+Edit the `maxquant.sh` script to set the `#SBATCH cpus-per-task=` option to match the number of threads you wish to use. E.g:
+
+```bash
+#SBATCH --cpus-per-task=4
+...
+export OUT_PATH="/wistar/it/"
+apptainer exec cp -r /opt/data $OUT_PATH
+```
+
+Edit the `maxquant.def` file to point to your `mqpar.xml` file and `data/` folder. E.g:
+
+```bash
+cp /wistar/it/mqpar.xml /opt/
+cp -r /wistar/it/data/ /opt/
+```
+
+## Running MaxQuant
+
+Once you have made all above changes, run the submission script:
+
+```bash
+sbatch maxquant.sh
+```
+
+Then review the `.out` and `.err` files in your working directory
+
+```bash
+tail -f *.out
+tail -f *.err
+```
+
+## Troubleshooting
+
+If you enounter errors, you can try:
+
+1. Deleting the container and rerunning the submission script.
+2. Use an interactive session and attempt to run MaxQuant on the fly with a small set of data.
+3. Email the [IT Help Desk](mailto::helpdesk@wistar.org) for support with any errors or screenshots.
+
