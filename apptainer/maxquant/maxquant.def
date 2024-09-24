@@ -18,7 +18,7 @@ From: ubuntu:20.04
   apt-get install -y dotnet-sdk-8.0
 
   # copy over archive
-  cp /resources/software/MaxQuant_v2.6.3.0.zip /opt/
+  cp /mnt/MaxQuant_v2.6.3.0.zip /opt/
   cp mqpar.xml /opt/
   cp -r data/ /opt/
 
