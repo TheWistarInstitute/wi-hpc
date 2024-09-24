@@ -1,6 +1,6 @@
 # MaxQuant
 
-- MaxQuant Home Page: https://www.maxquant.org/
+MaxQuant Home Page: https://www.maxquant.org/
 
 Please use apptainer to leverage the containerized version of maxquant.
 
@@ -8,7 +8,7 @@ Please use apptainer to leverage the containerized version of maxquant.
 1. Create the `maxquant.def` file and use apptainer to build the container
 2. Use the `maxquant.sh` script to build the container and run the maxquant
 
-***NOTE***: You will need to update the file paths to your data in the `mqpar.xml` file as well as the number of threads you wish to use in the following lines:
+***NOTE***: You will need to update the file paths to your data in the `mqpar.xml` file as well as the number of ***threads*** you wish to use in the following lines. The `<numThreads>` MUST match the `cpus-per-task=` option in the `maxquant.sh` submission script.
 
 ```bash
 # fasta file path
@@ -22,5 +22,3 @@ Please use apptainer to leverage the containerized version of maxquant.
 # number of threads
 <numThreads>4</numThreads>
 ```
-
-

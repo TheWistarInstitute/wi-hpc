@@ -22,7 +22,7 @@ fi
 apptainer run --writable-tmpfs maxquant.sif
 
 # Copy out data
-apptainer exec --bind=/wistar/it:/mnt cp -r /opt/data /mnt/aharral/out_data
+apptainer exec --bind=/wistar/it:/mnt/ cp -r /opt/data /mnt/aharral/out_data
 
 # Clean up
 apptainer cache clean
