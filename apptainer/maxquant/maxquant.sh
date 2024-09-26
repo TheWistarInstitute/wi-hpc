@@ -19,7 +19,7 @@ module load apptainer
 # UPDATE THIS .sif FILE NAME IF YOU WANT TO CHANGE IT (optional)
 if ! test -f maxquant.sif; then
     echo "Container does not exist...building"
-    apptainer build --bind=/applications/maxquant/:/mnt/ maxquant.sif maxquant.def
+    apptainer build --bind=/applications/maxquant/:/apps/ maxquant.sif maxquant.def
     echo "Container maxquant.sif was build successfully"
 else
     echo "Container already exists, please delete it and run again."
@@ -27,12 +27,7 @@ else
 fi
 
 # Run MaxQuant
-apptainer run --writable-tmpfs maxquant.sif
-
-# Copy out data
-# UPDATE THIS PATH TO AN OUTPUT DIRECTORY
-export OUT_PATH="/path/to/output"
-apptainer exec cp -r /opt/data $OUT_PATH
+apptainer run --bind=/wistar/:/mnt/ --writable-tmpfs maxquant.sif
 
 # Clean up apptainer
 apptainer cache clean --force
