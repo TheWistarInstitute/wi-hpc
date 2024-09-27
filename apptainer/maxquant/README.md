@@ -6,6 +6,12 @@
 
 Download these files
 
+```bash
+wget https://raw.githubusercontent.com/TheWistarInstitute/wi-hpc/refs/heads/main/apptainer/maxquant/maxquant.def
+wget https://raw.githubusercontent.com/TheWistarInstitute/wi-hpc/refs/heads/main/apptainer/maxquant/maxquant.sh
+wget https://raw.githubusercontent.com/TheWistarInstitute/wi-hpc/refs/heads/main/apptainer/maxquant/mqpar.xml
+```
+
 Edit the mqpar.xml configuration file to point to your `.fasta` files and `.raw` files. As well as the `<numThreads>` option to match the number of threads you wish to use. E.g:
 
 ```bash
