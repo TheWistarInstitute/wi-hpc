@@ -4,12 +4,7 @@
 
 ## Setup
 
-Clone this repository and change the directory to `apptainer/maxquant`
-
-```bash
-git clone https://github.com/TheWistarInstitute/wi-hpc.git
-cd wi-hpc/apptainer/maxquant
-```
+Download these files
 
 Edit the mqpar.xml configuration file to point to your `.fasta` files and `.raw` files. As well as the `<numThreads>` option to match the number of threads you wish to use. E.g:
 
