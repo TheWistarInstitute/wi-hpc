@@ -21,10 +21,7 @@ if ! test -f maxquant.sif; then
     apptainer build --bind=/applications/maxquant/:/apps/ maxquant.sif maxquant.def
     echo "Container maxquant.sif was build successfully"
 else
-    echo "Container already exists...deleting and building again"
-    rm maxquant.sif
-    apptainer build --bind=/applications/maxquant/:/apps/ maxquant.sif maxquant.def
-    echo "Container maxquant.sif was build successfully"
+    echo "Container already exists...delete it and run script again"
 fi
 
 # Run MaxQuant
