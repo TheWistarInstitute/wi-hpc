@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: r-base:4.3.2
+From: r-base:latest
 
 %help
   This container provides an R script and research data. To run the script:
