@@ -1,3 +1,8 @@
+# Name: standard-sub.sh
+# Author: Alex Harral (aharral@wistar.org)
+# Date: 10/29/2024
+# Notes: Standard submission script for Slurm in the WI-HPC Cluster. Prints out what node ran the job to the .out file
+
 #!/bin/bash
 #SBATCH --job-name=sample               # create a short name for your job
 #SBATCH --partition=defq                # shared partition (queue)

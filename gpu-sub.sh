@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Requesting one gpu in the 'gpu' partition (required)
 #SBATCH --gres=gpu:1
 #SBATCH --partition=gpu
