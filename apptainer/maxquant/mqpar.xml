@@ -3,7 +3,7 @@
    <fastaFiles>
       <FastaFileInfo>
           <!--- UPDATE THIS PATH -->
-         <fastaFilePath>/opt/data/fasta/20240806_UP000002311_Scerevisiae_559292_CI.fasta</fastaFilePath>
+          <fastaFilePath>path/to/example.fasta</fastaFilePath>
          <identifierParseRule>>(.*)</identifierParseRule>
          <descriptionParseRule></descriptionParseRule>
          <taxonomyParseRule></taxonomyParseRule>
@@ -145,7 +145,7 @@
    <profilePerformance>False</profilePerformance>
    <filePaths>
            <!--- UPDATE THIS PATH -->
-           <string>/opt/data/raw/081924_Yeast_DDA_OA-AfterAP.raw</string>
+       <string>path/to/example.raw</string>
    </filePaths>
    <experiments>
       <string>experiment.example</string>

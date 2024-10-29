@@ -26,7 +26,7 @@ From: ubuntu:latest
   cd /opt
 
   # Download the cellRanger 8.0.0 archive
-  curl -o cellranger-8.0.0.tar.gz "https://cf.10xgenomics.com/releases/cell-exp/cellranger-8.0.0.tar.gz?Expires=1710828354&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=ZvSrnXUUyhn7h6M21Gqe6YxiAVkVqyxIgnpdo9lZ0VxHEldMTogfIvSQUx4PWBw7wZEwPhuuVRoMfF3M9OlSnw3KXFF9L3NY0OB-Io~64VuISQxDYpmEb0Vtn4q5Y48KLEyFnGm5s74dRkL8Y2J0KK3XGJH4KlhsdeoATWed--69LJjoveAaNlAgApQ-ax-ME19-LsVCdWJhRkdwqedu~-Y4GdOeJSH6PArjzGlBHOL5UX-0h2SJSX1BrYncqCq3WTr1Q~MVWZLqPXjHB1nXejzLRJrmRNY6oAvvMA7FcJwtZNf6pm1fP72gwwIO~-PHjlap3Kdc01RgnURnwaJ6oQ__"
+  curl -o cellranger-8.0.0.tar.gz "https://cf.10xgenomics.com/releases/cell-exp/cellranger-8.0.0.tar.gz"
 
   # Unpack the archive
   tar -xzvf cellranger-8.0.0.tar.gz
