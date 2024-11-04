@@ -1,21 +1,35 @@
 Bootstrap: docker
 From: debian:latest
 
+%help
+    Defintion file for DiaNN running on latest debian
+
+%labels
+    Author: Alex Harral
+    Email: aharral@wistar.org
+    Version: 1.0
+
 %environment
+    # Set environment up
     LANG=en_US.UTF-8
     LANGUAGE=en_US:en
     LC_ALL=en_US.UTF-8
 
 %post
+    # Install dependencies
     apt-get update
     apt-get install -y wget unzip libgomp1 locales
     locale-gen en_US.UTF-8
+
+    # Install DiaNN
     cd /opt
     export VERSION=1.9.2
     wget https://github.com/vdemichev/DiaNN/releases/download/$VERSION/diann-$VERSION.Linux.zip -O diann-$VERSION.Linux.zip
     unzip diann-$VERSION.Linux.zip
-    rm diann-$VERSION.Linux.zip
     chmod -R 755 diann-$VERSION
+
+    # Remove zip
+    rm diann-$VERSION.Linux.zip
 
 %test
     export VERSION=1.9.2
