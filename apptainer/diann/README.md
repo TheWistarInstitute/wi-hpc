@@ -7,7 +7,7 @@ GitHub: https://github.com/vdemichev/DiaNN
 Build the container with the `apptainer build` command with the `recipe.def` file:
 
 ```bash
-apptainer build diann.sif recipe.def
+apptainer build diann.sif recipe-diann.def
 ```
 
 ## Running Container

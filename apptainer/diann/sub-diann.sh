@@ -17,7 +17,7 @@ module load apptainer
 # if the .sif file does not exist, build/pull it
 if ! test -f diann.sif; then
     echo "Container does not exist...building"
-    apptainer build diann.sif recipe.def
+    apptainer build diann.sif recipe-diann.def
 fi
 
 # execute command within image
