@@ -23,12 +23,12 @@ module load apptainer
 export AF_VERS=3
 
 # if the .sif file does not exist, build it
-if ! test -f alphafold${AF_VERS}.sif; then
+if ! test -f alphafold$AF_VERS.sif; then
   echo "Container does not exist...building"
-  apptainer build alphafold${AF_VERS}.sif alphafold${AF_VERS}.def
+  apptainer build alphafold$AF_VERS.sif alphafold$AF_VERS.def
 fi
 
-apptainer run -nv --bind=path/to/data:path/to/mount alphafold${AF_VERS}.sif \
+apptainer run -nv --bind=path/to/data:path/to/mount alphafold$AF_VERS.sif \
   --fasta_paths=path/to/fasta \
   --data_dir=path/to/data \
   --output_dir=path/to/output \
@@ -37,4 +37,4 @@ apptainer run -nv --bind=path/to/data:path/to/mount alphafold${AF_VERS}.sif \
   --gpu_devices=0   # uses first GPU allocated [0,1,2,3]
 
 # Remove .sif file after completed
-rm alphafold3.sif
+rm alphafold$AF_VERS.sif
