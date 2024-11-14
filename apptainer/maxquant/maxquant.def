@@ -11,11 +11,6 @@ From: ubuntu:20.04
   How To Run:
     - submit the `maxquant.sh` script
 
-%labels
-  Author: Alex Harral
-  Email: aharral@wistar.org
-  Version: 0.1
-
 %post
 
   # update and upgrade
