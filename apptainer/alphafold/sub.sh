@@ -1,4 +1,4 @@
-# This is the container version of Alphafold
+# This is the container version of Alphafold3
 
 #!/bin/bash
 # Requesting one gpu in the 'gpu' partition (required)
@@ -20,16 +20,21 @@
 # Load Required Modules
 module load apptainer
 
+export AF_VERS=3
+
 # if the .sif file does not exist, build it
-if ! test -f alphafold.sif; then
+if ! test -f alphafold${AF_VERS}.sif; then
   echo "Container does not exist...building"
-  apptainer build alphafold.sif alphafold.def
+  apptainer build alphafold${AF_VERS}.sif alphafold${AF_VERS}.def
 fi
 
-apptainer run -nv --bind=path/to/data:path/to/mount alphafold.sif \
+apptainer run -nv --bind=path/to/data:path/to/mount alphafold${AF_VERS}.sif \
   --fasta_paths=path/to/fasta \
   --data_dir=path/to/data \
   --output_dir=path/to/output \
   --model_preset=monomer \
   --max_template_date=YYYY-MM-DD \
   --gpu_devices=0   # uses first GPU allocated [0,1,2,3]
+
+# Remove .sif file after completed
+rm alphafold3.sif
