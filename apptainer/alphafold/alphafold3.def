@@ -67,9 +67,4 @@ Stage: spython-base
     export XLA_CLIENT_MEM_FRACTION=0.95
 
 %runscript
-    cd /app/alphafold3
-    exec /bin/bash python3 run_alphafold.py "$@"
-
-%startscript
-    cd /app/alphafold3
-    exec /bin/bash python3 run_alphafold.py "$@"
+    python3 /app/alphafold3/run_alphafold.py "$@"
