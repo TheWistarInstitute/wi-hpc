@@ -7,8 +7,8 @@
 Download these files
 
 ```bash
-wget https://raw.githubusercontent.com/TheWistarInstitute/wi-hpc/refs/heads/main/apptainer/maxquant/maxquant.def
-wget https://raw.githubusercontent.com/TheWistarInstitute/wi-hpc/refs/heads/main/apptainer/maxquant/maxquant.sh
+wget https://raw.githubusercontent.com/TheWistarInstitute/wi-hpc/refs/heads/main/apptainer/maxquant/recipe.def
+wget https://raw.githubusercontent.com/TheWistarInstitute/wi-hpc/refs/heads/main/apptainer/maxquant/sub.sh
 wget https://raw.githubusercontent.com/TheWistarInstitute/wi-hpc/refs/heads/main/apptainer/maxquant/mqpar.xml
 ```
 

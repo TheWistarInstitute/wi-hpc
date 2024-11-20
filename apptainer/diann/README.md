@@ -7,7 +7,7 @@ GitHub: https://github.com/vdemichev/DiaNN
 Build the container with the `apptainer build` command with the `recipe.def` file:
 
 ```bash
-apptainer build diann.sif recipe-diann.def
+apptainer build diann.sif recipe.def
 ```
 
 ## Running Container
@@ -20,7 +20,7 @@ apptainer run diann.sif
 
 You can update the `%runscript` section in the `recipe.def` file to change the default run command.
 
-OR
+***OR***
 
 Run the container with the `apptainer exec` command which will allow you to pass a command to the container:
 

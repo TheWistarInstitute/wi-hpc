@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# Template Submission script for use with apptainer containers and defintions files
+
 #SBATCH --job-name=sample               # create a short name for your job
 #SBATCH --partition=defq                # shared partition (queue)
 #SBATCH --nodes=1                       # node count
@@ -16,9 +19,8 @@ module load apptainer
 
 # if the .sif file does not exist, build/pull it
 if ! test -f container.sif; then
-    echo "Container does not exist...building"
-    apptainer pull docker://image
-    apptainer build container.sif recipe.def
+    apptainer pull docker://image               # pull image from registry
+    apptainer build container.sif recipe.def    # OR build on definition file
 fi
 
 # execute command within image
