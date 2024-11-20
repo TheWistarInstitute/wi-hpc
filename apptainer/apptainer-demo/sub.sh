@@ -17,7 +17,7 @@ module load apptainer
 # if the .sif file does not exist, build it
 if ! test -f python.sif; then
   echo "Container does not exist...building"
-  apptainer build python.sif python_recipe.def
+  apptainer build python.sif recipe.def
 fi
 
 apptainer exec python.sif python3 fibonacci.py 10
