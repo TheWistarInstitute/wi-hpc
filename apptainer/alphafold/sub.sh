@@ -28,13 +28,7 @@ if ! test -f alphafold_v$AF_VERS.sif; then
   apptainer build alphafold_v$AF_VERS.sif alphafold_v$AF_VERS.def
 fi
 
-apptainer run -nv --bind=path/to/data:path/to/mount alphafold_v$AF_VERS.sif \
-  --fasta_paths=path/to/fasta \
-  --data_dir=path/to/data \
-  --output_dir=path/to/output \
-  --model_preset=monomer \
-  --max_template_date=YYYY-MM-DD \
-  --gpu_devices=0   # uses first GPU allocated [0,1,2,3]
+apptainer run -nv alphafold_v$AF_VERS.sif --helpshort
 
 # Remove .sif file after completed
 rm alphafold_v$AF_VERS.sif
