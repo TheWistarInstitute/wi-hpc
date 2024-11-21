@@ -25,7 +25,7 @@ if ! test -f alphafold_v$AF_VERS.sif; then
   apptainer build alphafold_v$AF_VERS.sif alphafold_v$AF_VERS.def
 fi
 
-apptainer run -nv alphafold_v$AF_VERS.sif --helpshort
+apptainer run --nv alphafold_v$AF_VERS.sif --helpshort
 
 # Remove .sif file after completed
 rm alphafold_v$AF_VERS.sif
