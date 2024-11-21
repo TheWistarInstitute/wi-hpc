@@ -47,6 +47,7 @@ Stage: spython-base
 
     # Install the Python dependencies AlphaFold 3 needs.
     cd /app/alphafold3/
+    pip3 install --upgrade pip
     pip3 install -r dev-requirements.txt
     pip3 install --no-deps .
     # Build chemical components database (this binary was installed by pip).
