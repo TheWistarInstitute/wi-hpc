@@ -13,5 +13,5 @@ fi
 # execute command within image
 apptainer exec container.sif commmand --args
 
-# or run the container with default run command (see %runscript section of definition file)
+# or run the container with default run command ()
 apptainer run container.sif --args
