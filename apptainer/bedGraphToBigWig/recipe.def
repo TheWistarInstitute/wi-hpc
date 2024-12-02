@@ -1,0 +1,19 @@
+Bootstrap: docker
+From: ubuntu:latest
+
+%post
+    apt -y update && apt -y install curl
+    export BEDGRAPHTOBIGWIG_VERSION=369
+    export BEDGRAPHTOBIGWIG_URL=http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64.v${BEDGRAPHTOBIGWIG_VERSION}/bedGraphToBigWig
+    export DEST_DIR=/usr/local/bin
+
+    curl -SLo ${DEST_DIR}/bedGraphToBigWig ${BEDGRAPHTOBIGWIG_URL} && \
+    chmod +x ${DEST_DIR}/bedGraphToBigWig
+
+%test
+    export DEST_DIR=/usr/local/bin
+    $DEST_DIR/bedGraphToBigWig
+
+%runscript
+    export DEST_DIR=/usr/local/bin
+    $DEST_DIR/bedGraphToBigWig
