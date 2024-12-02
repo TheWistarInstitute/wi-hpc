@@ -10,10 +10,6 @@ From: ubuntu:latest
     curl -SLo ${DEST_DIR}/bedGraphToBigWig ${BEDGRAPHTOBIGWIG_URL} && \
     chmod +x ${DEST_DIR}/bedGraphToBigWig
 
-%test
-    export DEST_DIR=/usr/local/bin
-    $DEST_DIR/bedGraphToBigWig
-
 %runscript
     export DEST_DIR=/usr/local/bin
     $DEST_DIR/bedGraphToBigWig
