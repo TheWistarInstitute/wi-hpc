@@ -17,10 +17,6 @@ From: ubuntu:latest
 
     # Create the conda environment
     conda env create -f /app/EMReady_v1.2/environment.yml --prefix=/app/emready_env
-    . /app/anaconda3/bin/activate
-    conda init
-    conda activate base
-    conda activate /app/emready_env
 
 %runscript
     export PATH="/app/anaconda3/bin/:$PATH"
