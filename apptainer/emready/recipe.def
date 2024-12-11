@@ -1,0 +1,30 @@
+Bootstrap: docker
+From: ubuntu:latest
+
+%files
+    # Copy over current working directory to /app/EMReady_v1.2
+    . /app/EMReady_v1.2
+%post
+    # Install dependencies
+    apt -y update && apt -y upgrade
+    apt -y install wget curl gfortran vim nano
+
+    # Install and configure Anaconda3
+    wget -O /tmp/Anaconda3-2024.10-1-Linux-x86_64.sh https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-x86_64.sh
+    bash /tmp/Anaconda3-2024.10-1-Linux-x86_64.sh -b -p /app/anaconda3
+    rm -f /tmp/Anaconda3-2024.10-1-Linux-x86_64.sh
+    export PATH="/app/anaconda3/bin/:$PATH"
+
+    # Create the conda environment
+    conda env create -f /app/EMReady_v1.2/environment.yml --prefix=/app/emready_env
+    . /app/anaconda3/bin/activate
+    conda init
+    conda activate base
+    conda activate /app/emready_env
+
+%runscript
+    export PATH="/app/anaconda3/bin/:$PATH"
+    . /app/anaconda3/bin/activate
+    conda activate base
+    conda activate /app/emready_env
+    /app/EMReady_v1.2/EMReady.sh "$@"
