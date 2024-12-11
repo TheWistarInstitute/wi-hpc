@@ -1,0 +1,56 @@
+# Choose which registy to pull from (docker, sylabs, biocontainers, etc.)
+# And which image to pull (ubuntu:latest)
+Bootstrap: registry
+From: image
+
+# Add metadata about the container here
+# Can be seen with the `apptainer inspect` command
+%labels
+    Description Template definition file for apptainer
+    Author Alex Harral (aharral@wistar.org)
+    Date 12/11/2024
+
+# Help section to describe how to use the container
+# Can be seen with the `apptainer run-help` command
+%help
+    This is how you run this container:
+        1. Step 1
+        2. Step 2
+        3. Step 3
+
+# Copy files into the container
+# This copys the current working directory to /tmp/dir1
+# Format is <source> <destiniation>
+%files
+    . /tmp/dir1
+
+# Download and setup section, put all downloads, installs, and configuration commands here
+# This one updates an ubuntu image and installs neofetch
+%post
+    apt -y update
+    apt -y upgrade
+    apt -y install neofetch
+
+# Runs at the very end of the build process and can be used to validate installations
+# You can also use this with the `apptainer test` command
+%test
+    grep -q NAME=\"Ubuntu\" /etc/os-release
+    if [ $? -eq 0 ]; then
+        echo "Container base is Ubuntu as expected."
+    else
+        echo "Container base is not Ubuntu."
+        exit 1
+    fi
+
+# Define environment variables that will be set at runtime
+# These are NOT available during build time
+%environment
+    export NOW=date
+    export INSTALL_DIR=/path/to/install
+
+# The default run command, when using the `apptainer run` command it will look to this section
+# Here you will use set up an application to call along with the special `"$@"` that will accept arguments you pass in at runtime
+%runscript
+    echo "Container was created $NOW"
+    echo "Arguments received: $*"
+    exec echo "$@"
