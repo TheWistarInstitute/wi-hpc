@@ -10,8 +10,6 @@
 
 samplesheet=$PWD/InputFile1.txt
 
-
 nm=`sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $1}'` 
-
 
 python $PWD/testCode.py $nm 1 $PWD ${SLURM_ARRAY_TASK_ID}

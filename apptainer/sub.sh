@@ -15,3 +15,6 @@ apptainer exec container.sif commmand --args
 
 # or run the container with default run command ()
 apptainer run container.sif --args
+
+# remove the container image once done
+rm -f /path/to/sif
