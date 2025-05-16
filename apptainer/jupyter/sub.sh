@@ -15,9 +15,7 @@
 port=$(shuf -i 6000-9999 -n 1)
 
 # define container name
-#container=scipy-notebook:latest
-# r container
-container=r-notebook:latest
+container=base-notebook:latest
 
 # load apptainer module
 module load apptainer
