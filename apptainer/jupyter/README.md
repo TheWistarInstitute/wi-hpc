@@ -34,7 +34,7 @@ apptainer exec scipy-notebook_latest.sif /usr/bin/ssh -N -f -R $PORT:localhost:$
 5. Start up the notebook in the container over the specified port.
 
 > [!IMPORTANT]
-> COPY OF THE URL STARTING WITH http://127.0.0.1 (also know as localhost)
+> COPY OF THE URL STARTING WITH http://127.0.0.1 (also known as localhost)
 
 ```bash
 apptainer exec scipy-notebook_latest.sif jupyter-notebook --no-browser --port=$PORT
