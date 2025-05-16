@@ -12,7 +12,7 @@
 #SBATCH --error slurm-%j.err         # Error file name and Location
 
 # generate a random port
-PORT=$(shuf -i 6000-9999 -n 1)
+PORT=$(shuf -i 8888-9999 -n 1)
 
 # define container name
 IMAGE=scipy-notebook:latest
