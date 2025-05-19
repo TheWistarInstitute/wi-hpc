@@ -8,10 +8,17 @@ From: ubuntu:latest
     apt -y update && apt -y upgrade
     apt -y install byacc gcc make g++ libz-dev flex gfortran python3 python-is-python3 flex bison mpich
     cd /app/dock6.12/install
+
+    # serial
     make -i distclean
     make install
-    make test
-    export PATH=/app/dock6.12/bin/dock6:$PATH
+
+    # parallel
+    cd /app/dock6/install && \
+    make -i cleandock && \
+    ./configure gnu.parallel && \
+    make dock
 
 %runscript
     /app/dock6.12/bin/dock6 "$@"
+
