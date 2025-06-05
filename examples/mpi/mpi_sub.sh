@@ -13,12 +13,12 @@ module load mpich/ge/gcc/64/
 
 # Compile the C code into executable
 mpicc -o hello_wistar hello_wistar.c
-mpicc -o hello_wistar2 hello_wistar2.c
 
-#mpirun -n 20 ./$EXEC
+# 2*2*6=24
+mpirun -np 24 ./hello_wistar
+
+# or better yet use srun (don't need to specify # of cores)
 srun --mpi=pmi2 ./hello_wistar
-srun --mpi=pmi2 ./hello_wistar2
 
 # Remove the executable
 rm hello_wistar
-rm hello_wistar2
