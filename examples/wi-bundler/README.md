@@ -1,5 +1,6 @@
 # Bundle and Unbundle Examples
 
+For all information relating to archiving and bundling, please see [https://hpc.apps.wistar/archive](https://hpc.apps.wistar/archive).
 
 ## Bundle
 
@@ -22,7 +23,12 @@ First, there is a `input.txt` file in where you will put the **full path** of al
 Next, there is a `bundle.sh` script that utilizes [Slurm Job Arrays](https://slurm.schedmd.com/job_array.html) to run multiple jobs in succession. The main idea here is to use the `$SLURM_ARRAY_TASK_ID` environment to grab the nth line from the `input.txt` file. For example, on the first iteration the script will bundle `/wistar/lab/path/to/data1`; the second interation will bundle `/wistar/lab/path/to/data2`; and so forth. This way, you can just run `sbatch bundle.sh` and let it run until all directories have been bundled.
 
 > [!IMPORTANT]
+> The `input.txt` file and `bundle.sh` file **must exist in the same directory**; Otherwise, you will need to provide the full path in the `..."$SLURM_ARRAY_TASK_ID"p path/to/input.txt...` line.
+
+> [!IMPORTANT]
 > Using an `sbatch` script with the `bundle` tool requires the `-y/--yes` flag to ensure auto-accepting of confirmations. Otherwise, the job will fail. 
 
 
 ### Unbundle
+
+Once you have received the `.tar.gz` files back from archive (via ticket), you will need to "unbundle" the data back to its original folder structure. The `unbundle` tool will make it easy to unpack all **chunks** back into a single folder.
